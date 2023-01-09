@@ -31,7 +31,7 @@ func QueryUserInfoByUserID(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	util.WriteSuccess(w, user)
-	fmt.Println("请求完成，查询用户信息成功")
+	fmt.Printf("请求完成，查询用户信息成功,用户信息：%+v", user)
 }
 
 // DeleteUserInfoByUserId 通过用户id删除对应的用户信息
@@ -58,13 +58,14 @@ func AddUserInfo(w http.ResponseWriter, r *http.Request) {
 		util.WriteFailed(w, 100002, "get request body message fail")
 		return
 	}
+	fmt.Printf("接收到添加用户请求，接收用户信息成功,用户信息为：%+v", user)
 	err = db.InsertUserInfo(user)
 	if err != nil {
 		util.WriteFailed(w, 100004, "addUseInfo fail")
 		return
 	}
 	util.WriteSuccess(w, "addUseInfo success")
-	fmt.Println("请求完成，添加用户信息成功")
+	fmt.Printf("请求完成，添加用户信息成功，用户信息为：%+v", user)
 }
 
 // ChangeUserInfoByUserId 通过用户id修改对应的用户信息
@@ -81,7 +82,7 @@ func ChangeUserInfoByUserId(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	util.WriteSuccess(w, "change sucess")
-	fmt.Println("请求完成，修改用户信息成功")
+	fmt.Printf("请求完成，x修改用户信息成功，修改后的用户信息为：%+v", user)
 }
 
 // DecodeUser 从http的post请求中解码出用户的body信息
